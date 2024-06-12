@@ -226,6 +226,8 @@ versioning = {
 
 - Locking: Prevents concurrent modifications to the state file. Which means only one person can apply the changes at a time.
 - State Management: Import existing infrastructure into Terraform state.
+- You can use the `terraform state list` command to list all resources in the state file.
+- You can use the `terraform state show` command to show details about a specific resource in the state file.
 - Resources:
     - https://developer.hashicorp.com/terraform/cli/state
     - https://learn.hashicorp.com/tutorials/terraform/state
