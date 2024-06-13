@@ -197,6 +197,114 @@ resource "google_compute_instance" "instance" {
 - Parameterize the `google_cloud_run_service` resource. Use the `for_each` meta argument to create multiple Cloud Run services.
 - Add the `prevent_destroy` lifecycle meta argument to the `google_cloud_run_service` resource to prevent the resource from being destroyed.
 
-### 10. Expressions (TODO)
+### 10. Expressions
+- Expressions allow you to manipulate values in Terraform.
+- You can use expressions to perform string operations.
+```hcl
+# Interpolate a variable
+"${var.region}"
 
-### 11. Functions (TODO)
+# Interpolate a local variable
+"${local.instance_name}"
+
+# Heredoc syntax
+<<EOF
+This is a heredoc syntax
+Multiple lines
+EOF
+
+# Concatenate two strings
+"${var.region}-network"
+```
+
+
+- You can use expressions to reference attributes of resources.
+```hcl
+# Reference the name attribute of the google_compute_network resource
+<RESOURCE TYPE>.<NAME>
+google_compute_network.network.name
+
+# Input variables
+var.<VARIABLE NAME>
+var.region
+
+# Local variables
+local.<VARIABLE NAME>
+local.instance_name
+
+# Output variables
+output.<OUTPUT NAME>
+output.instance_ip_address
+
+# Module outputs
+module.<MODULE NAME>.<OUTPUT NAME>
+
+# Data sources
+data.<DATA TYPE>.<DATA SOURCE NAME>.<ATTRIBUTE NAME>
+data.google_compute_network.network.self_link
+
+# For the count meta arguments
+count.index
+
+# For the for_each meta arguments
+each.key
+each.value
+```
+
+- You can use expressions to perform arithmetic operations.
+```hcl
+# Add two numbers
+1 + 2
+
+# Compare two numbers
+1 < 2
+```
+
+- You can use expressions to perform conditional operations.
+```hcl
+# If-else condition
+condition ? true_val : false_val
+```
+
+- You can use expressions to perform loop operations.
+```hcl
+# For list loop
+[for item in list : expression]
+
+# For map loop
+{for key, value in map : key => value}
+```
+
+- Resources:
+    - https://developer.hashicorp.com/terraform/language/expressions
+    - https://developer.hashicorp.com/terraform/language/expressions/operators
+    - https://developer.hashicorp.com/terraform/language/expressions/strings
+    - https://developer.hashicorp.com/terraform/language/expressions/conditionals
+    - https://developer.hashicorp.com/terraform/language/expressions/for
+    
+### 11. Functions
+- Functions allow you to perform complex operations in Terraform.
+- You can use functions to manipulate strings.
+```hcl
+# Lowercase a string
+lower("HELLO")
+````
+- You can use functions to manipulate lists.
+```hcl
+# Get the length of a list
+length(["a", "b", "c"])
+```
+- You can use functions to manipulate maps.
+```hcl
+# Get the keys of a map
+keys({a = 1, b = 2, c = 3})
+```
+
+- You can use functions to manipulate numbers.
+```hcl
+# Get the absolute value of a number
+abs(-1)
+```
+
+- Resources:
+    - https://developer.hashicorp.com/terraform/language/functions
